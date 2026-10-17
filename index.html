@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Threat Identification Assistant v2</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>Threat Identification Assistant v2</h1>
+    <p>Look up known vulnerabilities for software and scan your own local network. Only scan systems you own or have written permission to test.</p>
+  </header>
+  <main>
+    <section class="panel">
+      <h2>1. Look up vulnerabilities (NVD)</h2>
+      <div class="row">
+        <input id="software" placeholder="Software, e.g. Apache HTTP Server" aria-label="Software name">
+        <input id="version" placeholder="Version, e.g. 2.4.49" aria-label="Version">
+        <button id="cve-btn" class="btn">Look up CVEs</button>
+      </div>
+      <p id="cve-status" class="status"></p>
+    </section>
+
+    <section class="panel">
+      <h2>2. Scan a local target (nmap)</h2>
+      <div class="row">
+        <input id="target" placeholder="localhost, 192.168.1.10 or 192.168.1.0/24" aria-label="Scan target">
+        <button id="scan-btn" class="btn">Run scan</button>
+      </div>
+      <label class="check"><input type="checkbox" id="authorized"> I own this network or have permission to scan it.</label>
+      <p id="scan-status" class="status"></p>
+      <div id="scan-results"></div>
+    </section>
+
+    <section class="panel">
+      <h2>3. Findings and report</h2>
+      <div class="row">
+        <button id="csv-btn" class="btn">Download CSV</button>
+        <button id="pdf-btn" class="btn">Download PDF</button>
+        <button id="clear-btn" class="btn secondary">Clear</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Source</th><th>Item</th><th>Detail</th><th>Score</th><th>Severity</th></tr></thead>
+          <tbody id="findings-body"></tbody>
+        </table>
+      </div>
+      <p id="empty" class="status">No findings yet.</p>
+    </section>
+  </main>
+  <script src="/static/script.js"></script>
+</body>
+</html>
